@@ -25,13 +25,13 @@ function extractToken(authorizationHeader) {
 // MIDDLEWARE: withAuthenticatedUser - embeds user in Request or returns a 401
 const bearerAuthentication = (request, env) => {
 	const authorizationHeader = request.headers.get('Authorization');
-	if (!authorizationHeader) {
-		return error(401, 'Unauthorized');
-	}
+	// if (!authorizationHeader) {
+	// 	return error(401, 'Unauthorized');
+	// }
 	const access_token = extractToken(authorizationHeader);
-	if (env.ACCESS_TOKEN !== access_token) {
-		return error(403, 'Forbidden');
-	}
+	// if (env.ACCESS_TOKEN !== access_token) {
+	// 	return error(403, 'Forbidden');
+	// }
 };
 
 // CORS, see https://itty.dev/itty-router/cors
