@@ -1,0 +1,21 @@
+name: Cloudfalre Worker Deploy
+on:
+  push:
+    branches:
+      - main
+  repository_dispatch:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build & Deploy Worker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: UD4sHVYSj3crHOxtGqhmjmVPum-4q6N2R71WvbKD
+          accountId: 85542ea7b47219a8449eef1fa8052563
+          preCommands: 'yarn'
+          command: 'deploy'
