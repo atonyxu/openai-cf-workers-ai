@@ -20,9 +20,31 @@ export const imageGenerationHandler = async (request, env) => {
                 }
             }
 
+            let word = json.prompt;
+
+            if (word.includes("dreamsharper")) {
+                model = '@cf/lykon/dreamshaper-8-lcm';
+                word = word.replace('dreamsharper', '');
+            }
+
             let inputs = {
-                prompt: json.prompt,
+                prompt: word,
             };
+
+            if (word.startsWith('中文')) {
+                let orgtext = word.replace('中文', '')
+                const messages = [
+                    { role: "system", content: "你是一个翻译专家，你需要将用户输入的内容准确无误的翻译为英文" },
+                    {
+                        role: "user",
+                        content: orgtext,
+                    },
+                ];
+                const resp = await env.AI.run("@cf/qwen/qwen1.5-14b-chat-awq", { messages });
+                inputs = {
+                    prompt: resp.response,
+                };
+            }
 
             if (json.prompt.startsWith('中文')) {
                 let orgtext = json.prompt.replace('中文', '')
