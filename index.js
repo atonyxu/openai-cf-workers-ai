@@ -30,7 +30,7 @@ const bearerAuthentication = (request, env) => {
     const allowed_region = ['CN'];
 
     if (!allowed_region.includes(region)) {
-        return error(403, 'Forbidden');
+        return new Response('<h1>Forbidden</h1>', { status: 403 });
     }
 };
 
