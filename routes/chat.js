@@ -1,5 +1,5 @@
 export const chatHandler = async (request, env) => {
-	let model = '@cf/mistral/mistral-7b-instruct-v0.1';
+	let model = '@cf/qwen/qwen1.5-14b-chat-awq';
 	let messages = [];
 	let error = null;
 
